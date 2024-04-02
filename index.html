@@ -66,16 +66,18 @@
     <script>
         // 미세먼지, 기온 API
         $(document).ready(function () {
-            let url_mise = "http://openAPI.seoul.go.kr:8088/6457514c45686a6b32344441774252/json/RealtimeCityAir/1/5/";
+            let url_mise = "http://openapi.seoul.go.kr:8088/6d4d776b466c656533356a4b4b5872/json/RealtimeCityAir/1/99";
             fetch(url_mise).then(res => res.json()).then(data => {
                 let mise = data['RealtimeCityAir']['row'][0]['IDEX_NM']
                 $('#msg_mise').text(mise)
+                console.log(mise)
             })
 
             let url_cel = "http://spartacodingclub.shop/sparta_api/weather/seoul"
             fetch(url_cel).then(res => res.json()).then(data => {
                 let temper = data['temp']
                 $('#msg_cel').text(temper);
+                console.log(temper)
             })
         })
 
