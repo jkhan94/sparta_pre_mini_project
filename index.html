@@ -66,6 +66,14 @@
     <script>
         // 미세먼지, 기온 API
         $(document).ready(function () {
+            $.ajax({
+                url: 'http://openapi.seoul.go.kr:8088/6d4d776b466c656533356a4b4b5872/json/RealtimeCityAir/1/99',
+                type: 'GET',
+                success: function (result) {
+                    console.log(result);
+                }
+            })
+            
             let url_mise = "http://openapi.seoul.go.kr:8088/6d4d776b466c656533356a4b4b5872/json/RealtimeCityAir/1/99";
             fetch(url_mise).then(res => res.json()).then(data => {
                 let mise = data['RealtimeCityAir']['row'][0]['IDEX_NM']
