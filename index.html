@@ -11,9 +11,6 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <!-- https 사이트에서 http 사이트로 요청 -->
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
-
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
 
@@ -69,14 +66,14 @@
     <script>
         // 미세먼지, 기온 API
         $(document).ready(function () {
-            let url_mise = "http://openapi.seoul.go.kr:8088/6d4d776b466c656533356a4b4b5872/json/RealtimeCityAir/1/99";
+            let url_mise = "//openapi.seoul.go.kr:8088/6d4d776b466c656533356a4b4b5872/json/RealtimeCityAir/1/99";
             fetch(url_mise).then(res => res.json()).then(data => {
                 let mise = data['RealtimeCityAir']['row'][0]['IDEX_NM']
                 $('#msg_mise').text(mise)
                 console.log(mise)
             })
 
-            let url_cel = "http://spartacodingclub.shop/sparta_api/weather/seoul"
+            let url_cel = "//spartacodingclub.shop/sparta_api/weather/seoul"
             fetch(url_cel).then(res => res.json()).then(data => {
                 let temper = data['temp']
                 $('#msg_cel').text(temper);
