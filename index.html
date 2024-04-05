@@ -64,25 +64,10 @@
             margin: 30px auto 0px auto;
         }
 
-        .about {
+        .members {
             width: 1200px;
             height: 100%;
             margin: 30px auto 0px auto;
-        }
-
-        .aboutInfo {
-            height: 100%;
-            /* a태그 길이 조정 */
-            display: inline-block;
-            font-size: 35px;
-        }
-
-        .aboutInfo>ins {
-            font-size: 30px;
-        }
-
-        .aboutInfo>ul>li>a {
-            font-size: 25px;
         }
     </style>
 
@@ -94,28 +79,28 @@
             $('.home').show();
             $('.wireframe').hide();
             $('.apiSpec').hide();
-            $('.about').hide();
+            $('.members').hide();
         }
 
         function show_wireframe() {
             $('.home').hide();
             $('.wireframe').show();
             $('.apiSpec').hide();
-            $('.about').hide();
+            $('.members').hide();
         }
 
         function show_apiSpec() {
             $('.home').hide();
             $('.wireframe').hide();
             $('.apiSpec').show();
-            $('.about').hide();
+            $('.members').hide();
         }
 
         function show_member() {
             $('.home').hide();
             $('.wireframe').hide();
             $('.apiSpec').hide();
-            $('.about').show();
+            $('.members').show();
         }
     </script>
 </head>
@@ -130,16 +115,14 @@
                     </svg>
                 </a>
                 <ul id="navUL" class="nav nav-pills col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <!-- index.html로 이동 -->
-                    <li><a class="nav-link" href="../index.html">Main</a></li>
                     <!-- 새로고침 -->
                     <li><a class="nav-link active" aria-current="page" onclick="show_home()">Home</a></li>
                     <!-- 와이어프레임 -->
                     <li><a href="#" class="nav-link" onclick="show_wireframe()">Wireframe</a></li>
                     <!-- API 명세서 -->
                     <li><a href="#" class="nav-link" onclick="show_apiSpec()">API Specification </a></li>
-                    <!-- 내 정보 -->
-                    <li><a href="#" class="nav-link" onclick="show_member()">About</a></li>
+                    <!-- 팀원 정보 -->
+                    <li><a href="#" class="nav-link" onclick="show_member()">Members</a></li>
                 </ul>
             </div>
         </div>
@@ -155,11 +138,10 @@
         <h2>메뉴를 누르면 원하시는 정보를 보실 수 있습니다.</h2>
     </div>
 
-    <div class="wireframe" id="wireframe" style="display:none;">
-        <center>
+    <div class="wireframe" id="wireframe" style="display:none;">    
+        <h3>와이어프레임 예시</h3>  
             <img
                 src="https://github.com/jkhan94/sparta_pre_mini_project/assets/163835909/43b4df86-de40-4706-a7c0-9004884f275b">
-        </center>
     </div>
 
     <div class="apiSpec" id="apiSpec" style="display:none;">
@@ -201,28 +183,109 @@
         </table>
     </div>
 
-    <div class="about" id="about" style="display:none;">
-        <div class="container text-left">
-            <div class="row align-items-start">
-                <div class="col">
+    <div class="members" id="members" style="display:none;">
+        <div id="card" class="row row-cols-1 row-cols-md-4 g-4">
+            <div class="col">
+                <div class="card h-100">
                     <img src="https://i.pinimg.com/originals/f5/84/63/f584632851966abd3f9b473719bb57b5.gif"
                         class="card-img-top" alt="...">
-                </div>
-                <div class="col">
-                    <div class="aboutInfo">
-                        <h2>한진경</h2>
-                        해 지기 전에 잔디를 심자.<br><br>
-
-                        <ins>개인 사이트</ins><br>
-                        <ul>
-                            <li><a href="https://blog.naver.com/jkhan94_it" target="_blank">Blog</a><br></li>
-                            <li><a href="https://github.com/jkhan94/" target="_blank">GitHub</a></li>
-                        </ul>
+                    <div class="card-body">
+                        <h5 class="card-title">한진경</h5>
+                        <p class="card-text">해 지기 전에 잔디를 심자.</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-body-secondary">
+                            <h6>개인 사이트</h6>
+                            <ul>
+                                <li><a href="https://blog.naver.com/jkhan94_it">Blog</a></li>
+                                <li><a href="https://github.com/jkhan94/">GitHub</a></li>
+                            </ul>
+                        </small>
                     </div>
                 </div>
             </div>
-        </div>
 
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://images.unsplash.com/photo-1446768500601-ac47e5ec3719?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1446&q=80"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">이름</h5>
+                        <p class="card-text">자기소개</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-body-secondary">
+                            <h6>개인 사이트</h6>
+                            <ul>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">GitHub</a></li>
+                            </ul>
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://images.unsplash.com/photo-1446768500601-ac47e5ec3719?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1446&q=80"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">이름</h5>
+                        <p class="card-text">자기소개</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-body-secondary">
+                            <h6>개인 사이트</h6>
+                            <ul>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">GitHub</a></li>
+                            </ul>
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://images.unsplash.com/photo-1446768500601-ac47e5ec3719?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1446&q=80"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">이름</h5>
+                        <p class="card-text">자기소개</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-body-secondary">
+                            <h6>개인 사이트</h6>
+                            <ul>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">GitHub</a></li>
+                            </ul>
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://images.unsplash.com/photo-1446768500601-ac47e5ec3719?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1446&q=80"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">이름</h5>
+                        <p class="card-text">자기소개</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-body-secondary">
+                            <h6>개인 사이트</h6>
+                            <ul>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">GitHub</a></li>
+                            </ul>
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <div class="container">
