@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JKHan</title>
+    <!-- 부트스트랩 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+
+        * {
+            font-family: "Nanum Pen Script", cursive;
+            font-size: large;
+        }
+
+        .mytitle {
+            background-image: url('https://img.freepik.com/free-photo/green-hill_53876-33577.jpg?size=626&ext=jpg&ga=GA1.1.1700460183.1712016000&semt=ais');
+            background-position: cover;
+            background-size: 1700px 250px;
+
+            width: 1200px;
+            height: 250px;
+            margin: 0px auto 0px auto;
+
+            /* 아이템 중앙 정렬. 
+            flex-direction은 아이템을 가로로 배열할지, 세로로 배열할지. */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mytitle>h1 {
+            color: blue;
+        }
+
+        #navUL>li>a {
+            font-size: large;
+        }
+
+        .home {
+            width: 1200px;
+            margin: 30px auto 0px auto;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wireframe {
+            width: 1200px;
+            margin: 30px auto 0px auto;
+        }
+
+        .apiSpec {
+            width: 1200px;
+            margin: 30px auto 0px auto;
+        }
+
+        .about {
+            width: 1200px;
+            height: 100%;
+            margin: 30px auto 0px auto;
+        }
+
+        .aboutInfo {
+            height: 100%;
+            /* a태그 길이 조정 */
+            display: inline-block;
+            font-size: 35px;
+        }
+
+        .aboutInfo>ins {
+            font-size: 30px;
+        }
+
+        .aboutInfo>ul>li>a {
+            font-size: 25px;
+        }
+    </style>
+
+    <script>
+        function show_home() {
+            // 새로고침
+            window.location.reload();
+
+            $('.home').show();
+            $('.wireframe').hide();
+            $('.apiSpec').hide();
+            $('.about').hide();
+        }
+
+        function show_wireframe() {
+            $('.home').hide();
+            $('.wireframe').show();
+            $('.apiSpec').hide();
+            $('.about').hide();
+        }
+
+        function show_apiSpec() {
+            $('.home').hide();
+            $('.wireframe').hide();
+            $('.apiSpec').show();
+            $('.about').hide();
+        }
+
+        function show_member() {
+            $('.home').hide();
+            $('.wireframe').hide();
+            $('.apiSpec').hide();
+            $('.about').show();
+        }
+    </script>
+</head>
+
+<body>
+    <header class="d-flex justify-content-center py-3">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-between">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                        <use xlink:href="#bootstrap"></use>
+                    </svg>
+                </a>
+                <ul id="navUL" class="nav nav-pills col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <!-- index.html로 이동 -->
+                    <li><a class="nav-link" href="../index.html">Main</a></li>
+                    <!-- 새로고침 -->
+                    <li><a class="nav-link active" aria-current="page" onclick="show_home()">Home</a></li>
+                    <!-- 와이어프레임 -->
+                    <li><a href="#" class="nav-link" onclick="show_wireframe()">Wireframe</a></li>
+                    <!-- API 명세서 -->
+                    <li><a href="#" class="nav-link" onclick="show_apiSpec()">API Specification </a></li>
+                    <!-- 내 정보 -->
+                    <li><a href="#" class="nav-link" onclick="show_member()">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    </div>
+    </header>
+
+    <div class="mytitle">
+        <h1>잔디 심는 개발자 지망생</h1>
+    </div>
+
+    <div class="home" id="home">
+        <h2>메뉴를 누르면 원하시는 정보를 보실 수 있습니다.</h2>
+    </div>
+
+    <div class="wireframe" id="wireframe" style="display:none;">
+        <center>
+            <img
+                src="https://github.com/jkhan94/sparta_pre_mini_project/assets/163835909/43b4df86-de40-4706-a7c0-9004884f275b">
+        </center>
+    </div>
+
+    <div class="apiSpec" id="apiSpec" style="display:none;">
+        <h3>API 명세서 예시</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">기능</th>
+                    <th scope="col">method</th>
+                    <th scope="col">URL</th>
+                    <th scope="col">request</th>
+                    <th scope="col">response</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">회원가입</th>
+                    <td>POST</td>
+                    <td>/Member.do</td>
+                    <td>아이디, 비밀번호, 이름, 이메일, 주소</td>
+                    <td>성공 시 "회원가입 성공" 출력. <br> 실패 시 에러 메시지 출력 </td>
+                </tr>
+                <tr>
+                    <th scope="row">로그인</th>
+                    <td>POST</td>
+                    <td>/Login.do</td>
+                    <td>session</td>
+                    <td>메인 페이지로 이동</td>
+                </tr>
+                <tr>
+                    <th scope="row">로그아웃</th>
+                    <td>GET</td>
+                    <td>/Login.do</td>
+                    <td>아이디, 비밀번호</td>
+                    <td>정보 다르면 "아이디 또는 비밀번호가 다릅니다" 출력 후 로그인 화면으로 이동. <br>
+                        정보 일치하면 홈페이지로 이동</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="about" id="about" style="display:none;">
+        <div class="container text-left">
+            <div class="row align-items-start">
+                <div class="col">
+                    <img src="https://i.pinimg.com/originals/f5/84/63/f584632851966abd3f9b473719bb57b5.gif"
+                        class="card-img-top" alt="...">
+                </div>
+                <div class="col">
+                    <div class="aboutInfo">
+                        <h2>한진경</h2>
+                        해 지기 전에 잔디를 심자.<br><br>
+
+                        <ins>개인 사이트</ins><br>
+                        <ul>
+                            <li><a href="https://blog.naver.com/jkhan94_it" target="_blank">Blog</a><br></li>
+                            <li><a href="https://github.com/jkhan94/" target="_blank">GitHub</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <div class="col-md-4 d-flex align-items-center">
+                <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+                    <svg class="bi" width="30" height="24">
+                        <use xlink:href="#bootstrap"></use>
+                    </svg>
+                </a>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Apache_Tomcat_logo.svg/300px-Apache_Tomcat_logo.svg.png"
+                    width="50" height="30">
+                <span class="mb-3 mb-md-0 text-body-secondary">© Team Tomcat</span>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
