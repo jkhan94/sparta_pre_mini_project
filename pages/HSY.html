@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2</title>
+    <!-- 부트스트랩 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- 제이쿼리 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+
+        #header,
+        #footer {
+            font-family: "Nanum Pen Script", cursive;
+        }
+
+        #header {
+            font-size: x-large;
+        }
+
+        #footer {
+            font-size: large;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: auto;
+        }
+
+        .mainBody {
+            width: 85%;
+            height: auto;
+            margin: 30px auto 0px auto;
+
+            /* 
+            mainbody 스타일 변경 시 아래에 작성해주세요 
+            글자색, 배경색은 영역 크기를 확인하기 위해 설정해두었습니다. 
+            지우고 작업하셔도 됩니다.
+            */
+            color: black;
+     
+            font-size: medium;
+        }
+        .cards{
+        display: flex;
+        flex-direction: column;
+        margin: 100px auto 200px auto;
+        width:1100px;
+        gap: 30px;
+        text-align: center;
+       }
+       .cardwrap1{
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        gap: 80px;
+        margin-bottom: 50px;
+       }
+       .cardwrap2{
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+       
+
+       }
+
+       .commentbox{
+            width: 1000px;
+            margin: 200px auto 50px auto;
+            display: flex;
+            gap:20px;
+            flex-direction: column;
+            text-align: center;
+        }
+        .comment{
+            height: 500px;
+        }
+        
+        .input-group{
+            margin-bottom: 20px;
+            height: 50px;
+        }
+        .sendcomment{
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
+
+    .write{
+        width: 500px;
+        margin: 200px auto 50px auto;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+    }
+    .postcards{
+        width: 1200px;
+        margin: 100px auto 50px auto;
+        text-align: center;
+    }
+
+     
+    </style>
+
+    <script>
+        function show_home() {
+            window.location.reload();
+        }
+
+    </script>
+    <script type="module">
+        // Firebase SDK 라이브러리 가져오기
+ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+ import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+ import { collection, addDoc, query, orderBy, limit, startAfter, startAt,endAt, endBefore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+ import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+ 
+ 
+ // Firebase 구성 정보 설정
+ const firebaseConfig = {
+   apiKey: "AIzaSyC_efRS07MujEow50cvrI6AM_S2pz6iKCc",
+   authDomain: "sparta-35722.firebaseapp.com",
+   projectId: "sparta-35722",
+   storageBucket: "sparta-35722.appspot.com",
+   messagingSenderId: "284836500872",
+   appId: "1:284836500872:web:69fc3912eb091633ad563d",
+   measurementId: "G-PGRME0CMB3"
+ };
+ 
+ // Firebase 인스턴스 초기화
+ const app = initializeApp(firebaseConfig);
+ const db = getFirestore(app);
+
+ $('#postbtn').click(async function(){
+    let title=$('#title').val();
+    let content=$('#content').val();
+    var today = new Date();
+
+    var year = today.getFullYear();
+    var month = ('0' + (today.getMonth() + 1)).slice(-2);
+    var day = ('0' + today.getDate()).slice(-2);
+
+    var dateString = year + '-' + month  + '-' + day;
+
+    var hours = ('0' + today.getHours()).slice(-2); 
+    var minutes = ('0' + today.getMinutes()).slice(-2);
+    var seconds = ('0' + today.getSeconds()).slice(-2); 
+
+    var timeString = hours + ':' + minutes  + ':' + seconds;
+
+    var currentDateTime=dateString+' '+timeString;
+
+    let doc = {
+      'title':title,
+      'content':content,
+      'date':currentDateTime
+    };
+    await addDoc(collection(db, "posting1"), doc);
+    alert("글 작성 완료");
+    window.location.reload();
+
+})
+const posts = query(collection(db, "posting1"), orderBy("date","desc"), limit(6));
+const docs = await getDocs(posts);
+
+docs.forEach((doc) => {
+    let row = doc.data();
+
+    let title=row['title'];
+    let content=row['content'];
+    let date=row['date'];
+
+    let temp_html=`
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">${title}</h5>
+                  <p class="card-text">${content}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-body-secondary">${date}</small>
+                  </div>
+              </div>
+            </div>
+            `;
+            $('#cardwrap').append(temp_html);
+});
+const lastVisiblePost = docs.docs[docs.docs.length-1];
+
+$('#prevpost').click(async function(){
+    $('#cardwrap').empty();
+    const prev = query(collection(db, "posting1"),
+    orderBy("date","desc"),
+    endAt(lastVisiblePost),
+    limit(6));
+
+    const docs = await getDocs(prev);
+
+    docs.forEach((doc) => {
+    let row = doc.data();
+
+    let title=row['title'];
+    let content=row['content'];
+    let date=row['date'];
+
+    let temp_html=`
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">${title}</h5>
+                  <p class="card-text">${content}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-body-secondary">${date}</small>
+                  </div>
+              </div>
+            </div>
+            `;
+            $('#cardwrap').append(temp_html);
+});
+})
+
+$('#nextpost').click(async function(){
+    $('#cardwrap').empty();
+    const next = query(collection(db, "posting1"),
+    orderBy("date","desc"),
+    startAfter(lastVisiblePost),
+    limit(6));
+
+    const docs = await getDocs(next);
+
+    docs.forEach((doc) => {
+    let row = doc.data();
+
+    let title=row['title'];
+    let content=row['content'];
+    let date=row['date'];
+
+    let temp_html=`
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">${title}</h5>
+                  <p class="card-text">${content}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-body-secondary">${date}</small>
+                  </div>
+              </div>
+            </div>
+            `;
+            $('#cardwrap').append(temp_html);
+});
+})
+
+ $('#commentbtn').click(async function(){
+    let name=$('#name').val();
+    let comment=$('#comment').val();
+
+    var today = new Date();
+
+    var year = today.getFullYear();
+    var month = ('0' + (today.getMonth() + 1)).slice(-2);
+    var day = ('0' + today.getDate()).slice(-2);
+
+    var dateString = year + '-' + month  + '-' + day;
+
+    var hours = ('0' + today.getHours()).slice(-2); 
+    var minutes = ('0' + today.getMinutes()).slice(-2);
+    var seconds = ('0' + today.getSeconds()).slice(-2); 
+
+    var timeString = hours + ':' + minutes  + ':' + seconds;
+
+    var currentDateTime=dateString+' '+timeString;
+
+    let doc = {
+      'name':name,
+      'comment':comment,
+      'date':currentDateTime
+    };
+    await addDoc(collection(db, "comment"), doc);
+    alert("댓글 작성 완료");
+    window.location.reload();
+
+})
+
+const first = query(collection(db, "comment"), orderBy("date","desc"), limit(7));
+const documentSnapshots = await getDocs(first);
+
+documentSnapshots.forEach((doc) => {
+    let row = doc.data();
+
+    let name=row['name'];
+    let comment=row['comment'];
+    let date=row['date'];
+
+    let temp_html=`
+    <div class="input-group">
+            <div class="input-group-text">${name}</div>
+            <div class="form-control" aria-label="With textarea" style="align-items:center;display:flex;">${comment}</div>
+            <div class="input-group-text">${date}</div>
+          </div>
+            `;
+            $('#commentwrap').append(temp_html);
+});
+
+
+$('#prevcomment').click(async function(){
+    $('#commentwrap').empty();
+    const prev = query(collection(db, "comment"),
+    orderBy("date","desc"),
+    endAt(lastVisibleComment),
+    limit(7));
+
+    const documentSnapshots = await getDocs(prev);
+
+documentSnapshots.forEach((doc) => {
+    let row = doc.data();
+
+    let name=row['name'];
+    let comment=row['comment'];
+    let date=row['date'];
+
+    let temp_html=`
+    <div class="input-group">
+            <div class="input-group-text">${name}</div>
+            <div class="form-control" aria-label="With textarea" style="align-items:center;display:flex;">${comment}</div>
+            <div class="input-group-text">${date}</div>
+          </div>
+            `;
+            $('#commentwrap').append(temp_html);
+});
+})
+
+const lastVisibleComment = documentSnapshots.docs[documentSnapshots.docs.length-1];
+
+
+    $('#nextcomment').click(async function(){
+    $('#commentwrap').empty();
+    const next = query(collection(db, "comment"),
+    orderBy("date","desc"),
+    startAfter(lastVisibleComment),
+    limit(7));
+
+    const documentSnapshots = await getDocs(next);
+
+    documentSnapshots.forEach((doc) => {
+    let row = doc.data();
+
+    let name=row['name'];
+    let comment=row['comment'];
+    let date=row['date'];
+
+    let temp_html=`
+    <div class="input-group">
+            <div class="input-group-text">${name}</div>
+            <div class="form-control" aria-label="With textarea" style="align-items:center;display:flex;">${comment}</div>
+            <div class="input-group-text">${date}</div>
+          </div>
+            `;
+           
+            $('#commentwrap').append(temp_html);
+});
+    })
+
+ </script>
+</head>
+
+<body>
+    <!-- 헤더 -->
+    <header id="header" class="p-3 mb-3 border-bottom">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                        <use xlink:href="#bootstrap"></use>
+                    </svg>
+                </a>
+                <ul id="navUL" class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <!-- 새로고침 -->
+                    <li><a href="../index.html" class="nav-link px-2 link-secondary" onclick="show_home()">Home</a></li>
+                    <!-- 팀원 -->
+                    <li><a href="../pages/MSJ.html" class="nav-link px-2 link-body-emphasis">1</a></li>
+                    <li><a href="HSY.html" class="nav-link px-2 link-body-emphasis">2</a></li>
+                    <li><a href="../pages/CSH.html" class="nav-link px-2 link-body-emphasis">3</a></li>
+                    <li><a href="../pages/LMH.html" class="nav-link px-2 link-body-emphasis">4</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div class="mainBody">
+        <div class="cards">
+            <h2>팀원 소개</h2>
+            <div class="cardwrap1">
+            <div class="card" style="width: 18rem;">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXR7KvmK3bjY6qZKIXvFu2BD0_M7lszTUAYQ&s" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">한진경</h5>
+                  <a class="card-text" href="https://blog.naver.com/jkhan94_it">블로그</a>
+                  <a class="card-text" href="https://github.com/jkhan94">깃허브</a>
+                </div>
+              </div>
+              <div class="card" style="width: 18rem;">
+                <img src="data:image/png;base64,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" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">문수정</h5>
+                  <a class="card-text" href="https://velog.io/@sujeongmoon/posts">블로그</a>
+                  <a class="card-text" href="https://github.com/sujeongmoon">깃허브</a>
+                </div>
+              </div>
+            </div>
+            <div class="cardwrap2">
+              <div class="card" style="width: 18rem;">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJmJVY3ZIMa2Ckj8VN5_DLtEiLoIAZRDLQ0w&s" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">홍서영</h5>
+                  <a class="card-text" href="https://velog.io/@hongsy521/posts">블로그</a>
+                  <a class="card-text" href="https://github.com/hongsy521">깃허브</a>
+                </div>
+              </div>
+              <div class="card" style="width: 18rem;">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAWBP_5_b0QcBqTEoSpkE_GQJuqE4lGP2whw&s" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">최성훈</h5>
+                  <a class="card-text" href="https://blog.naver.com/cjhfifi64">블로그</a>
+                  <a class="card-text" href="https://github.com/choisunghoon20240313">깃허브</a>
+                </div>
+              </div>
+              <div class="card" style="width: 18rem;">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUDHbEduRu-kzRvpMp27AbIKN8m1vCkZw_sQ&s" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">이민호</h5>
+                  <a class="card-text" href="">블로그</a>
+                  <a class="card-text" href="https://github.com/2minus">깃허브</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="write">
+            <h2>포스팅하기</h2>
+            <div class="form-floating mb-3 mt-3">
+                <input type="text" class="form-control" id="title" placeholder="제목">
+                <label for="floatingInput">Title</label>
+              </div>
+              <div class="form-floating mb-3">
+                <textarea class="form-control" placeholder="내용" id="content" style="height: 200px"></textarea>
+                <label for="floatingTextarea2">Content</label>
+              </div>
+              <button type="button" class="btn btn-primary" id="postbtn">확인</button>
+          </div>
+          <div class="postcards">
+            <h2>전체 포스트</h2>
+            <div class="row row-cols-1 row-cols-md-3 g-4 mt-3" id="cardwrap">
+             
+              </div>
+              <nav aria-label="Page navigation example" style="display: flex;justify-content: center;margin-top: 50px;">
+                <ul class="pagination">
+                  <li class="page-item">
+                    <a class="page-link" aria-label="Previous" id="prevpost">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" aria-label="Next" id="nextpost">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+          </div>
+
+          <div class="commentbox">
+            <h2>자유 게시판</h2>
+          <div class="comment" id="commentwrap">   
+        </div>
+        <nav aria-label="Page navigation example" style="display: flex;justify-content: center;">
+            <ul class="pagination">
+              <li class="page-item">
+                <a class="page-link" aria-label="Previous" id="prevcomment">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+          
+              <li class="page-item">
+                <a class="page-link" aria-label="Next" id="nextcomment">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <div class="sendcomment">
+            <div class="form-floating mb-3" style="width: 20%;">
+                <input type="text" class="form-control" id="name" placeholder="이름" >
+                <label for="floatingInput">이름</label>
+              </div>
+              <div class="form-floating" style="width: 80%;" >
+                <input type="text" class="form-control" id="comment" placeholder="댓글 내용" >
+                <label for="floatingPassword">댓글 내용</label>
+              </div>
+              
+          <button type="button" class="btn btn-primary" style="height: 60px;width: 10%;" id="commentbtn">확인</button>
+        </div>
+    </div>
+    </div>
+
+    <!-- 푸터 -->
+    <div id="footer" class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <div class="col-md-4 d-flex align-items-center">
+                <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+                    <svg class="bi" width="30" height="24">
+                        <use xlink:href="#bootstrap"></use>
+                    </svg>
+                </a>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Apache_Tomcat_logo.svg/300px-Apache_Tomcat_logo.svg.png"
+                    width="50" height="30">
+                <span class="mb-3 mb-md-0 text-body-secondary">© Team Tomcat</span>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>

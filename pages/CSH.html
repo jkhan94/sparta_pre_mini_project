@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3</title>
+    <!-- 부트스트랩 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- 제이쿼리 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+
+        #header,
+        #footer {
+            font-family: "Nanum Pen Script", cursive;
+        }
+
+        #header {
+            font-size: x-large;
+        }
+
+        #footer {
+            font-size: large;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        .mainBody {
+            width: 85%;
+            min-height: 70%; /*범위 넘어가서 min-height로 변경*/
+            margin: 30px auto 0px auto;
+
+            /* 
+            mainbody 스타일 변경 시 아래에 작성해주세요 
+            글자색, 배경색은 영역 크기를 확인하기 위해 설정해두었습니다. 
+            지우고 작업하셔도 됩니다.
+            */
+            color: black;
+            background-color: white;
+            font-size: xx-large;
+        }
+        .card-text.small {
+    font-size: 19px; 
+    text-align: left; 
+}
+        .btn {
+            color: black;
+            background-color: aqua;
+        }
+
+        /* CSS 추가 시 아래에 작성해주세요. */
+    </style>
+
+    <script>
+        function show_home() {
+            window.location.reload();
+        }
+
+        // 아래에 추가해주세요.
+
+    </script>
+</head>
+
+<body>
+    <!-- 헤더 -->
+    <header id="header" class="p-3 mb-3 border-bottom">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                        <use xlink:href="#bootstrap"></use>
+                    </svg>
+                </a>
+                <ul id="navUL" class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <!-- 새로고침 -->
+                    <li><a href="../index.html" class="nav-link px-2 link-secondary" onclick="show_home()">Home</a></li>
+                    <!-- 팀원 -->
+                    <li><a href="../pages/MSJ.html" class="nav-link px-2 link-body-emphasis">1</a></li>
+                    <li><a href="../pages/HSY.html" class="nav-link px-2 link-body-emphasis">2</a></li>
+                    <li><a href="CSH.html" class="nav-link px-2 link-body-emphasis">3</a></li>
+                    <li><a href="../pages/LMH.html" class="nav-link px-2 link-body-emphasis">4</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div class="mainBody">
+        <!-- 구현하신 기능은 mainBody 안에 붙여주세요. 
+            아래 p태그는 지우고 작업해주세요.
+            배경색, 글자색 변경은 CSS에 있습니다.
+        -->
+        <div class="d-flex">
+        <div class="card" style="width: 18rem;">
+            <img src="https://i.namu.wiki/i/tLKKBW22MklXtwtvmab5oiCYuAiSHHfGHGdj9IA8m2ipcGVLrHDmA8YAsPKeBmEy4lVLUgvxk-2C--q7ELK-fDFspFm_T9HAL4hqmMkhp4a6eph2NQ20F8sHjKJMU4AyVSvEcwu43ODsmGKx6PuWqA.webp" class="card-img-top" alt="...">
+            <div class="card-body flex-fill">
+              <h5 class="card-title">개요</h5>
+              <p id class="card-text  small">아파치 소프트웨어 재단에서 개발하는 Java 기반의 서블릿 컨테이너이자 웹 서버, JSP/Spring으로 웹사이트를 구축한다면 톰캣은 거의 반드시 사용된다고 볼 수 있다.</p>
+              <a href="https://tomcat.apache.org/" target="_blank" class="btn btn-success">Link</a>
+            </div>
+          </div>
+          <div class="card" style="width: 18rem;">
+            <img src="data:image/png;base64,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" class="card-img-top" alt="...">
+            <div class="card-body flex-fill">
+              <h5 class="card-title">목적</h5>
+              <p class="card-text text-left small">팀원 분들과 협동하여 페이지를 하나 만드는 것</p>
+              
+            </div>
+          </div>
+          <div class="card" style="width: 18rem;">
+            <img src="data:image/png;base64,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" class="card-img-top" alt="...">
+            <div class="card-body flex-fill">
+              <h5 class="card-title">팀원</h5>
+              <p class="card-text text-left small d-flex flex-column">
+                <span>한진경</span>
+                <span>문수정</span>
+                <span>홍서영</span>
+                <span>최성훈</span>
+                <span>이민호</span>
+            </p>
+              
+            </div>
+          </div><div class="card" style="width: 18rem;">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRszFvQwMv74ehCUJx0mUOkn1MUFdfxv-S44QSPHh-ZEkh2wCPe89DBALNiNAmcr6G96os&usqp=CAU" class="card-img-top" alt="...">
+            <div class="card-body flex-fill">
+              <h5 class="card-title">와이어 프레임</h5>
+              <p class="card-text text-left small">페이지를 만드는 과정</p>
+              <a href="https://miro.com/app/board/uXjVKYhLfoY=/" target="_blank" id="btn" class="btn btn-success">Link</a>
+            </div>
+          </div>
+          </div>
+    </div>
+
+    <!-- 푸터 -->
+    <div id="footer" class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <div class="col-md-4 d-flex align-items-center">
+                <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+                    <svg class="bi" width="30" height="24">
+                        <use xlink:href="#bootstrap"></use>
+                    </svg>
+                </a>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Apache_Tomcat_logo.svg/300px-Apache_Tomcat_logo.svg.png"
+                    width="50" height="30">
+                <span class="mb-3 mb-md-0 text-body-secondary">© Team Tomcat</span>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
